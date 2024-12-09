@@ -2,16 +2,17 @@
 
 function abs(v) {return v < 0 ? -v : v}
 {
-    a[NR] = $1
-    b[NR] = $2
+  a[NR] = $1
+  b[NR] = $2
 }
-{
-    asort(a)
-    asort(b)
+END {
+  asort(a)
+  asort(b)
+  sum = 0
+  for (i = 1; i <= NR; i++) {
+    sum += abs(b[i] - a[i])
+  }
+  print sum
+  # 1666427
 }
-END{
-    for (i = 1; i <= NR; i++) {
-        sum += abs(b[i] - a[i])
-    }
-}
-END { print sum }
+
