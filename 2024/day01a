@@ -1,0 +1,17 @@
+#!/opt/homebrew/bin/gawk -f
+
+function abs(v) {return v < 0 ? -v : v}
+{
+    a[NR] = $1
+    b[NR] = $2
+}
+{
+    asort(a)
+    asort(b)
+}
+END{
+    for (i = 1; i <= NR; i++) {
+        sum += abs(b[i] - a[i])
+    }
+}
+END { print sum }
