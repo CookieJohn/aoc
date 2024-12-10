@@ -1,6 +1,5 @@
 #!/opt/homebrew/bin/gawk -f
 
-BEGIN { sum = 0 }
 {
   a[NR] = $1
   count[$2]++
