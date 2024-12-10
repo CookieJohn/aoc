@@ -1,21 +1,14 @@
 #!/opt/homebrew/bin/gawk -f
-function positive(a, b) { return (a - b) > 0 }
+function decreasing(a, b) { return (a - b) > 0 }
 function abs(v) {return v < 0 ? -v : v}
-BEGIN {
-  result=0
-}
 {
     safe = 1
+    init = decreasing($1, $2)
     for (i = 1; i < NF; i++) {
-      init = positive($1, $2)
-      p = $i
-      n = $(i+1)
-      distance = abs(p - n)
-      # print $1, $2, init, distance
-      if (positive(p, n) == init && distance >= 1 && distance <= 3) {
-      } else
-      { 
+      distance = abs($i - $(i+1))
+      if (!(decreasing($i, $(i+1)) == init && distance >= 1 && distance <= 3)) {
         safe = 0
+        break
       }
     }
     result += safe
