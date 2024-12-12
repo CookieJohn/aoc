@@ -1,0 +1,14 @@
+#!/opt/homebrew/bin/gawk -f
+
+{
+  while (match($0, /mul\([0-9]+,[0-9]+\)/)) {
+    matched = substr($0, RSTART, RLENGTH)
+    split(substr(matched, index(matched, "(")+1, index(matched, ")")-index(matched, "(")-1), arr, ",")
+    sum += arr[1] * arr[2]
+    $0 = substr($0, RSTART + RLENGTH)
+  }
+}
+END{
+  print sum
+  # 191183308
+}
